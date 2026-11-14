@@ -2,7 +2,7 @@
 
 Die Galerie zeigt Produkte aus dem Makerspace des OSC Bürgli, St.Gallen, mit Beschrieb und Links zu Anleitungen.
 
-**Seite:** https://makerspace-osc.github.io
+**Seite:** https://oscmakeit.github.io
 
 ## So kommt ein Projekt auf die Seite
 
