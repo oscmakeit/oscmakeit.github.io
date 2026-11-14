@@ -6,11 +6,15 @@ Die Galerie zeigt Produkte aus dem Makerspace des OSC, St.Gallen, mit Beschrieb 
 
 ## So kommt ein Projekt auf die Seite
 
-1. **Einreichen:** Auf der Galerie auf «+ Projekt einreichen» klicken (oder hier unter *Issues › New issue › Projekt einreichen*). Formular ausfüllen und ein Foto hineinziehen. Dafür braucht es ein GitHub-Konto.
+1. **Einreichen:** Auf der Galerie auf «+ Projekt einreichen» klicken (oder hier unter *Issues › New issue › Projekt einreichen*). Formular ausfüllen und ein Foto hineinziehen. Dafür braucht es ein GitHub-Konto. Einreichen dürfen nur Teammitglieder, also Personen mit Schreibrechten in diesem Repository. Einreichungen von anderen werden automatisch geschlossen und gesperrt.
 2. **Prüfen:** Das Team Makerspace schaut das Projekt an. Wichtig: keine Gesichter und keine Namen auf dem Foto.
 3. **Freigeben:** Dem Issue das Label **`freigegeben`** geben. Eine Automatik verkleinert das Foto, entfernt die Metadaten (z. B. GPS), trägt das Projekt in `projects.json` ein und schliesst das Issue. Nach ein bis zwei Minuten ist es online.
 
 Labels setzen können nur Mitglieder mit Schreibrechten. So geht nichts ohne Prüfung online.
+
+## Teammitglied hinzufügen
+
+In der Organisation unter *People › Invite member* einladen und im Repository unter *Settings › Collaborators and teams* die Rolle **Write** geben.
 
 ## Projekt ändern oder löschen
 

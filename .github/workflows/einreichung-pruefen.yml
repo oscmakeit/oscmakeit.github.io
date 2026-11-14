@@ -1,0 +1,31 @@
+name: Einreichung prüfen
+
+# Nur Teammitglieder (Personen mit Schreibrechten) dürfen Projekte einreichen.
+# Einreichungen von anderen werden sofort geschlossen und gesperrt.
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Berechtigung der einreichenden Person prüfen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          AUTHOR: ${{ github.event.issue.user.login }}
+          NUMBER: ${{ github.event.issue.number }}
+        run: |
+          PERM=$(gh api "repos/$REPO/collaborators/$AUTHOR/permission" --jq '.permission' 2>/dev/null || echo none)
+          echo "Berechtigung von $AUTHOR: $PERM"
+          case "$PERM" in
+            admin|maintain|write) echo "Teammitglied, Einreichung bleibt offen."; exit 0 ;;
+          esac
+          gh issue comment "$NUMBER" --repo "$REPO" \
+            --body "Danke für dein Interesse. Projekte können nur vom Team Makerspace eingereicht werden. Diese Einreichung wurde deshalb geschlossen."
+          gh issue close "$NUMBER" --repo "$REPO" --reason "not planned"
+          gh api -X PUT "repos/$REPO/issues/$NUMBER/lock" -f lock_reason=off-topic
