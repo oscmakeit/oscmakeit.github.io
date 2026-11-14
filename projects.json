@@ -1,22 +1,173 @@
 [
   {
     "nr": 1,
-    "titel": "test",
-    "text": "Test",
+    "titel": "Handyständer",
     "tech": "3D-Druck",
-    "niveau": "",
-    "klasse": "",
-    "jahr": "",
-    "material": "",
-    "zeit": "",
-    "foto": "fotos/001-test.jpg",
+    "niveau": "Einsteiger",
+    "klasse": "1. Oberstufe",
+    "jahr": "2026",
+    "material": "PLA-Filament, ca. 25 g",
+    "zeit": "4 Lektionen",
+    "text": "Ein Handyständer nach eigenen Massen. Die Schülerinnen und Schüler messen ihr Handy aus, konstruieren den Ständer in Tinkercad und drucken ihn in PLA.",
+    "vorgehen": "1. Handy ausmessen: Breite, Dicke mit Hülle und Position der Ladebuchse.\n2. In Tinkercad einen Grundkörper bauen und die Auflage mit 70 Grad Neigung ausschneiden.\n3. Eine Aussparung für das Ladekabel einplanen.\n4. Als STL exportieren, im Slicer mit 0,2 mm Schichthöhe und 15 % Füllung vorbereiten.\n5. Drucken, Kanten entgraten und testen.\n\nTipp: Die Auflage 1 mm breiter machen als gemessen. Sonst klemmt das Handy mit Hülle.",
     "links": [
       {
-        "name": "Link",
-        "url": "https://www.sbb.ch/de"
+        "name": "Tinkercad",
+        "url": "https://www.tinkercad.com"
+      },
+      {
+        "name": "Vorlagen auf Printables",
+        "url": "https://www.printables.com"
       }
     ],
-    "issue": 1,
-    "datum": "2026-11-14"
+    "foto": "fotos/001-handystaender.jpg",
+    "fotos": [
+      "fotos/001-handystaender.jpg",
+      "fotos/001-handystaender-2.jpg",
+      "fotos/001-handystaender-3.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
+  },
+  {
+    "nr": 2,
+    "titel": "Schlüsselanhänger",
+    "tech": "Lasercutter",
+    "niveau": "Einsteiger",
+    "klasse": "1. Oberstufe",
+    "jahr": "2026",
+    "material": "Pappelsperrholz 3 mm, Schlüsselring",
+    "zeit": "2 Lektionen",
+    "text": "Ein Schlüsselanhänger mit eigenem Logo oder Namen. Das Motiv wird als Vektorgrafik gezeichnet, graviert und aus Sperrholz geschnitten.",
+    "vorgehen": "1. Motiv von Hand skizzieren, maximal 5 × 5 cm.\n2. In Inkscape nachzeichnen. Schnittlinien rot und haarfein, Gravurflächen schwarz.\n3. Loch für den Ring mit 4 mm Durchmesser setzen, mindestens 3 mm vom Rand.\n4. Datei an den Lasercutter schicken, zuerst gravieren, dann schneiden.\n5. Kanten leicht schleifen und Ring montieren.\n\nTipp: Feine Schrift unter 3 mm Höhe wird unleserlich.",
+    "links": [
+      {
+        "name": "Inkscape",
+        "url": "https://inkscape.org/de/"
+      }
+    ],
+    "foto": "fotos/002-schluesselanhaenger.jpg",
+    "fotos": [
+      "fotos/002-schluesselanhaenger.jpg",
+      "fotos/002-schluesselanhaenger-2.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
+  },
+  {
+    "nr": 3,
+    "titel": "LED-Nachtlicht",
+    "tech": "Elektronik",
+    "niveau": "Mittel",
+    "klasse": "2. Oberstufe",
+    "jahr": "2026",
+    "material": "Micro:bit, LED-Streifen mit 8 Pixeln, Sperrholz 3 mm, Acrylglas",
+    "zeit": "6 Lektionen",
+    "text": "Ein Nachtlicht, das sich selbst einschaltet. Der Micro:bit misst die Helligkeit im Raum und schaltet die LEDs bei Dunkelheit ein. Das Gehäuse kommt aus dem Lasercutter.",
+    "vorgehen": "1. LED-Streifen an Pin 0, 3V und GND des Micro:bit anschliessen.\n2. In MakeCode die Helligkeit messen und einen Schwellenwert festlegen.\n3. Programm schreiben: Unter dem Schwellenwert leuchten die LEDs, darüber sind sie aus.\n4. Gehäuse als Steckbox zeichnen, mit Fenster für das Acrylglas.\n5. Teile lasern, zusammenstecken und die Elektronik einbauen.\n\nDas war schwierig: Der Lichtsensor reagiert auf die eigenen LEDs. Lösung: Sensor nach aussen richten und mit einer Wartezeit von zwei Sekunden arbeiten.",
+    "links": [
+      {
+        "name": "MakeCode für Micro:bit",
+        "url": "https://makecode.microbit.org"
+      },
+      {
+        "name": "Boxen-Generator",
+        "url": "https://boxes.hackerspace-bamberg.de"
+      }
+    ],
+    "foto": "fotos/003-led-nachtlicht.jpg",
+    "fotos": [
+      "fotos/003-led-nachtlicht.jpg",
+      "fotos/003-led-nachtlicht-2.jpg",
+      "fotos/003-led-nachtlicht-3.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
+  },
+  {
+    "nr": 4,
+    "titel": "Upcycling-Tasche",
+    "tech": "Textil",
+    "niveau": "Mittel",
+    "klasse": "2. Oberstufe",
+    "jahr": "2026",
+    "material": "Alte Jeans, Flexfolie, Nähgarn",
+    "zeit": "5 Lektionen",
+    "text": "Aus einer alten Jeans wird eine Tasche. Das Motiv zeichnen die Jugendlichen selbst, schneiden es mit dem Vinylplotter und pressen es auf den Stoff.",
+    "vorgehen": "1. Hosenbeine abtrennen und den oberen Teil der Jeans als Taschenkörper verwenden.\n2. Die untere Öffnung zunähen, aus den Hosenbeinen zwei Träger schneiden und annähen.\n3. Motiv zeichnen, digitalisieren und spiegeln.\n4. Mit dem Plotter aus Flexfolie schneiden und entgittern.\n5. Mit der Transferpresse 15 Sekunden bei 160 Grad aufpressen.\n\nTipp: Das Spiegeln geht gern vergessen. Vor dem Schneiden zu zweit kontrollieren.",
+    "links": [
+      {
+        "name": "Inkscape",
+        "url": "https://inkscape.org/de/"
+      }
+    ],
+    "foto": "fotos/004-upcycling-tasche.jpg",
+    "fotos": [
+      "fotos/004-upcycling-tasche.jpg",
+      "fotos/004-upcycling-tasche-2.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
+  },
+  {
+    "nr": 5,
+    "titel": "Insektenhotel",
+    "tech": "Holz",
+    "niveau": "Mittel",
+    "klasse": "1. Oberstufe",
+    "jahr": "2026",
+    "material": "Fichtenholz 18 mm, Bambusrohre, Hartholzklötze, Schrauben",
+    "zeit": "6 Lektionen",
+    "text": "Ein Insektenhotel für den Schulgarten. Die Klasse plant in Gruppen, sägt und bohrt die Teile und montiert die Hotels an einem sonnigen Standort.",
+    "vorgehen": "1. Plan zeichnen mit Rückwand, zwei Seiten, Boden und Schrägdach.\n2. Teile anreissen, sägen und Kanten schleifen.\n3. Rahmen verschrauben, Löcher vorbohren.\n4. Bambusrohre auf 12 cm kürzen und die Enden sauber schleifen.\n5. Hartholzklötze mit Löchern von 3 bis 8 mm Durchmesser bohren.\n6. Fächer füllen und das Hotel nach Südosten ausrichten.\n\nTipp: Nur ins Längsholz bohren und die Löcher gut ausschleifen. Splitter verletzen die Flügel der Wildbienen.",
+    "links": [
+      {
+        "name": "Wildbienen-Infos",
+        "url": "https://www.wildbee.ch"
+      }
+    ],
+    "foto": "fotos/005-insektenhotel.jpg",
+    "fotos": [
+      "fotos/005-insektenhotel.jpg",
+      "fotos/005-insektenhotel-2.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
+  },
+  {
+    "nr": 6,
+    "titel": "Wetterstation",
+    "tech": "Programmierung",
+    "niveau": "Fortgeschritten",
+    "klasse": "3. Oberstufe",
+    "jahr": "2026",
+    "material": "ESP32, Sensor BME280, 3D-gedrucktes Gehäuse, USB-Netzteil",
+    "zeit": "ca. 20 Stunden (SPA)",
+    "text": "Eine Wetterstation, die Temperatur, Luftfeuchtigkeit und Luftdruck misst und die Werte live auf einer Webseite zeigt. Entstanden als selbstgesteuerte Projektarbeit.",
+    "vorgehen": "1. Sensor über I2C an den ESP32 anschliessen und mit einem Testprogramm auslesen.\n2. Den ESP32 ins WLAN einbinden und einen kleinen Webserver programmieren.\n3. Eine Webseite gestalten, die die Messwerte alle 30 Sekunden neu lädt.\n4. Ein wetterfestes Gehäuse mit Lamellen konstruieren und drucken.\n5. Station draussen montieren und eine Woche lang Daten sammeln.\n6. Messwerte mit einer offiziellen Wetterstation vergleichen.\n\nDas würde ich anders machen: Das Gehäuse zuerst klein testen. Der erste Druck dauerte neun Stunden und der Sensor passte nicht hinein.",
+    "links": [
+      {
+        "name": "Arduino",
+        "url": "https://www.arduino.cc"
+      },
+      {
+        "name": "Tinkercad",
+        "url": "https://www.tinkercad.com"
+      }
+    ],
+    "foto": "fotos/006-wetterstation.jpg",
+    "fotos": [
+      "fotos/006-wetterstation.jpg",
+      "fotos/006-wetterstation-2.jpg",
+      "fotos/006-wetterstation-3.jpg"
+    ],
+    "issue": null,
+    "datum": "2026-11-14",
+    "platzhalter": true
   }
 ]

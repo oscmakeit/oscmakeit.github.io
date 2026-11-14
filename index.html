@@ -57,6 +57,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .card .short{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .more{font-size:14px;font-weight:600;margin-top:auto}
 .card:hover .more{color:#b3261e}
+.badge{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid #111;padding:3px 8px}
 /* Detailseite */
 .detail{display:flex;flex-direction:column;gap:48px}
 .back{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:600;text-decoration:none}
@@ -177,6 +178,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       meta.appendChild(el('span', { class: 'nr' }, 'Nr. ' + pad(p.nr)));
       meta.appendChild(el('span', { class: 'sub' }, [str(p.tech, 40), str(p.klasse, 30)].filter(Boolean).join(' · ')));
       c.appendChild(meta);
+      if (p.platzhalter) c.appendChild(el('span', { class: 'badge' }, 'Beispiel'));
       var h = el('h2'); h.appendChild(el('a', { href: '#' + hashOf(p) }, str(p.titel, 80))); c.appendChild(h);
       c.appendChild(el('p', { class: 'short' }, str(p.text, 800)));
       c.appendChild(el('span', { class: 'more', 'aria-hidden': 'true' }, 'Projekt ansehen →'));
@@ -190,6 +192,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     var head = el('header', { class: 'd-head' });
     head.appendChild(el('span', { class: 'd-nr' }, 'Nr. ' + pad(p.nr)));
     head.appendChild(el('h2', null, str(p.titel, 80)));
+    if (p.platzhalter) head.appendChild(el('span', { class: 'badge' }, 'Beispielprojekt mit Platzhalterbildern'));
     var sub = [str(p.tech, 40), str(p.klasse, 30), str(p.jahr, 9)].filter(Boolean).join(' · ');
     if (sub) head.appendChild(el('span', { class: 'd-sub' }, sub));
     d.appendChild(head);
