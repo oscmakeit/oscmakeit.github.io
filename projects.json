@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "nr": 1,
+    "titel": "test",
+    "text": "Test",
+    "tech": "3D-Druck",
+    "niveau": "",
+    "klasse": "",
+    "jahr": "",
+    "material": "",
+    "zeit": "",
+    "foto": "fotos/001-test.jpg",
+    "links": [
+      {
+        "name": "Link",
+        "url": "https://www.sbb.ch/de"
+      }
+    ],
+    "issue": 1,
+    "datum": "2026-11-14"
+  }
+]
