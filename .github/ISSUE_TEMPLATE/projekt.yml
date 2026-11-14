@@ -1,0 +1,90 @@
+name: Projekt einreichen
+description: Ein Produkt aus dem Makerspace für die Projektgalerie erfassen.
+title: "Projekt: "
+labels: ["projekt"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke fürs Einreichen! Das Team Makerspace prüft das Projekt. Nach der Freigabe erscheint es automatisch auf der Galerie.
+  - type: input
+    id: titel
+    attributes:
+      label: Titel
+      placeholder: z. B. LED-Nachtlicht
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: Kurzer Beschrieb
+      description: Was ist es, wie ist es entstanden? Zwei bis drei Sätze reichen.
+    validations:
+      required: true
+  - type: dropdown
+    id: tech
+    attributes:
+      label: Technik
+      options:
+        - 3D-Druck
+        - Lasercutter
+        - Elektronik
+        - Programmierung
+        - Vinylplotter
+        - Textil
+        - Holz
+        - Anderes
+    validations:
+      required: true
+  - type: dropdown
+    id: niveau
+    attributes:
+      label: Niveau
+      options:
+        - Einsteiger
+        - Mittel
+        - Fortgeschritten
+  - type: dropdown
+    id: klasse
+    attributes:
+      label: Klasse
+      options:
+        - 1. Oberstufe
+        - 2. Oberstufe
+        - 3. Oberstufe
+        - Gemischt
+  - type: input
+    id: jahr
+    attributes:
+      label: Jahr
+      placeholder: "2026"
+  - type: input
+    id: material
+    attributes:
+      label: Material
+      placeholder: z. B. Micro:bit, LED-Streifen, Sperrholz
+  - type: input
+    id: zeit
+    attributes:
+      label: Zeitaufwand
+      placeholder: z. B. 4 Lektionen
+  - type: textarea
+    id: foto
+    attributes:
+      label: Foto
+      description: Ein Foto des Produkts hier hineinziehen. Bitte ohne Gesichter.
+  - type: textarea
+    id: links
+    attributes:
+      label: Links
+      description: Pro Zeile ein Link mit Bezeichnung, z. B. «Anleitung https://…»
+      placeholder: |
+        Anleitung https://…
+        Vorlagen https://…
+  - type: checkboxes
+    id: datenschutz
+    attributes:
+      label: Datenschutz
+      options:
+        - label: Auf dem Foto sind keine Gesichter und keine Namen zu sehen.
+          required: true

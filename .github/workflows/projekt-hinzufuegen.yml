@@ -1,0 +1,56 @@
+name: Projekt hinzufügen
+
+# Läuft, sobald jemand vom Team einem eingereichten Projekt das Label «freigegeben» gibt.
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: projekt-hinzufuegen
+  cancel-in-progress: false
+
+jobs:
+  add:
+    if: github.event.label.name == 'freigegeben' && contains(github.event.issue.labels.*.name, 'projekt')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bildwerkzeug installieren
+        run: npm install --no-save sharp@0.33
+
+      - name: Projekt in Galerie eintragen
+        id: add
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node .github/scripts/add-project.mjs
+
+      - name: Änderungen speichern
+        env:
+          NR: ${{ steps.add.outputs.nr }}
+          TITEL: ${{ steps.add.outputs.titel }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "makerspace-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects.json fotos
+          git commit -m "Projekt Nr. $NR: $TITEL (#$ISSUE_NUMBER)"
+          git push
+
+      - name: Issue schliessen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+            --body "Das Projekt ist jetzt als Nr. ${{ steps.add.outputs.nr }} in der Galerie. Die Seite aktualisiert sich in ein bis zwei Minuten."
+          gh issue close ${{ github.event.issue.number }} --repo ${{ github.repository }}
