@@ -1,6 +1,6 @@
-# Makerspace OSC Bürgli · Projektgalerie
+# Makerspace OSC · Projektgalerie
 
-Die Galerie zeigt Produkte aus dem Makerspace des OSC Bürgli, St.Gallen, mit Beschrieb und Links zu Anleitungen.
+Die Galerie zeigt Produkte aus dem Makerspace des OSC, St.Gallen, mit Beschrieb und Links zu Anleitungen.
 
 **Seite:** https://oscmakeit.github.io
 

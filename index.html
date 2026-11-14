@@ -3,12 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Makerspace OSC Bürgli · Projektgalerie</title>
-<meta name="description" content="Produkte aus dem Makerspace des OSC Bürgli, St.Gallen, mit Beschrieb und Anleitungen zum Nachbauen.">
+<title>Makerspace OSC · Projektgalerie</title>
+<meta name="description" content="Produkte aus dem Makerspace des OSC, St.Gallen, mit Beschrieb und Anleitungen zum Nachbauen.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://oscmakeit.github.io/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:#fff;color:#111;font-family:'Inter Tight',system-ui,sans-serif}
 a{color:#111}a:hover{color:#b3261e}
 .wrap{max-width:1240px;margin:0 auto;padding:40px 40px 96px;display:flex;flex-direction:column;gap:64px}
@@ -75,15 +79,21 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .d-text h3{margin:0;font-size:22px;font-weight:600}
 .d-text p{margin:0;font-size:18px;line-height:1.7;color:#222;white-space:pre-line}
 .d-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid #e3e3e3;padding-top:20px}
+.top{align-items:center}
+.brand{display:inline-flex;align-items:center;gap:12px;font-weight:600;text-decoration:none}
+.brand img{width:44px;height:44px;border-radius:50%;display:block}
+.hero-title{flex:1 1 560px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:32px}
+.hero-title h1{flex:1 1 380px}
+.logo{width:clamp(120px,16vw,190px);height:auto;aspect-ratio:1;border-radius:50%;transform:rotate(-6deg);box-shadow:0 12px 28px rgba(0,0,0,.18)}
 @media (max-width:640px){.wrap{padding:24px 20px 64px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top" style="margin-bottom:-16px"><a href="#" style="font-weight:600;text-decoration:none">Makerspace OSC Bürgli</a><span>Sammlung · Oberstufe · St.Gallen</span></div>
+  <div class="top" style="margin-bottom:-16px"><a href="#" class="brand"><img src="logo.jpg" alt="" width="44" height="44"><span>Makerspace OSC</span></a><span>Sammlung · Oberstufe · St.Gallen</span></div>
   <header id="hero" style="display:flex;flex-direction:column;gap:56px">
     <div class="hero">
-      <h1>Dinge, die<br>wir gemacht<br>haben.</h1>
+      <div class="hero-title"><img class="logo" src="logo.jpg" alt="Logo Makerspace OSC MAKEIT"><h1>Dinge, die<br>wir gemacht<br>haben.</h1></div>
       <div class="intro">
         <p>Ein Katalog der Produkte aus unserem Makerspace. Jedes Objekt mit Beschrieb, Entstehung und Links zu Anleitung und Vorlagen.</p>
         <div><a class="btn" id="addBtn" href="#">+ Projekt einreichen</a></div>
@@ -99,7 +109,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     <article class="detail" id="detail" hidden></article>
   </main>
 
-  <footer><span>Makerspace OSC Bürgli, St.Gallen</span><span>Kuratiert vom Team Makerspace</span></footer>
+  <footer><span>Makerspace OSC, St.Gallen</span><span>Kuratiert vom Team Makerspace</span></footer>
 </div>
 
 <script>
@@ -242,10 +252,10 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     if (inDetail){
       $('state').hidden = true;
       renderDetail(p); lastCard = 'karte-' + pad(p.nr);
-      document.title = str(p.titel, 80) + ' · Makerspace OSC Bürgli';
+      document.title = str(p.titel, 80) + ' · Makerspace OSC';
       window.scrollTo(0, 0);
     } else {
-      document.title = 'Makerspace OSC Bürgli · Projektgalerie';
+      document.title = 'Makerspace OSC · Projektgalerie';
       renderList();
       var c = lastCard && document.getElementById(lastCard);
       if (c) c.scrollIntoView({ block: 'center' });
