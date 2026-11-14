@@ -84,7 +84,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .brand img{width:44px;height:44px;border-radius:50%;display:block}
 .hero-title{flex:1 1 600px;display:flex;flex-wrap:nowrap;align-items:center;gap:24px 40px}
 .hero-title h1{flex:0 1 auto}
-.logo{flex:0 0 auto;width:clamp(110px,14vw,180px);height:auto;aspect-ratio:1;border-radius:50%;transform:rotate(-6deg);box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.logo{flex:0 0 auto;align-self:flex-start;width:clamp(110px,14vw,180px);height:auto;aspect-ratio:1;border-radius:50%;transform:rotate(-6deg);box-shadow:0 12px 28px rgba(0,0,0,.18)}
 @media (max-width:640px){.hero-title{flex-wrap:wrap}.wrap{padding:24px 20px 64px}}
 </style>
 </head>
@@ -93,8 +93,9 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   <div class="top" style="margin-bottom:-16px"><a href="#" class="brand">Makerspace OSC</a><span>Sammlung · Oberstufe · St.Gallen</span></div>
   <header id="hero" style="display:flex;flex-direction:column;gap:56px">
     <div class="hero">
-      <div class="hero-title"><h1>Dinge, die<br>wir gemacht<br>haben.</h1><img class="logo" src="logo.jpg" alt="Logo Makerspace OSC MAKEIT"></div>
+      <div class="hero-title"><h1>Dinge, die<br>wir gemacht<br>haben.</h1></div>
       <div class="intro">
+        <img class="logo" src="logo.jpg" alt="Logo Makerspace OSC MAKEIT">
         <p>Ein Katalog der Produkte aus unserem Makerspace. Jedes Objekt mit Beschrieb, Entstehung und Links zu Anleitung und Vorlagen.</p>
         <div><a class="btn" id="addBtn" href="#">+ Projekt einreichen</a></div>
       </div>
