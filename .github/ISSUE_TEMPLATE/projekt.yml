@@ -21,6 +21,11 @@ body:
       description: Was ist es, wie ist es entstanden? Zwei bis drei Sätze reichen.
     validations:
       required: true
+  - type: textarea
+    id: vorgehen
+    attributes:
+      label: Vorgehen
+      description: Freiwillig. Wie seid ihr vorgegangen? Was war schwierig, was würdet ihr anders machen? Erscheint auf der Projektseite.
   - type: dropdown
     id: tech
     attributes:
@@ -71,8 +76,8 @@ body:
   - type: textarea
     id: foto
     attributes:
-      label: Foto
-      description: Ein Foto des Produkts hier hineinziehen. Bitte ohne Gesichter.
+      label: Fotos
+      description: Ein bis acht Fotos hineinziehen. Das erste ist das Titelbild. Bitte ohne Gesichter.
   - type: textarea
     id: links
     attributes:

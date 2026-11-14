@@ -44,22 +44,23 @@ const slug = titel.toLowerCase()
   .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'projekt';
 
-// Foto: erstes Bild aus dem Feld herunterladen, verkleinern, Metadaten (z. B. GPS) entfernen
-let foto = null;
-const fotoField = get('Foto');
-const img = fotoField.match(/https:\/\/(?:github\.com\/user-attachments\/assets\/[\w-]+|user-images\.githubusercontent\.com\/[^\s)"']+|private-user-images\.githubusercontent\.com\/[^\s)"']+)/);
-if (img) {
-  const res = await fetch(img[0], { headers: token ? { Authorization: `Bearer ${token}` } : {}, redirect: 'follow' });
-  if (res.ok) {
-    const buf = Buffer.from(await res.arrayBuffer());
-    const name = `${String(nr).padStart(3, '0')}-${slug}.jpg`;
+// Fotos: bis zu 8 Bilder herunterladen, verkleinern, Metadaten (z. B. GPS) entfernen
+const fotos = [];
+const fotoField = get('Fotos') || get('Foto');
+const imgRe = /https:\/\/(?:github\.com\/user-attachments\/assets\/[\w-]+|user-images\.githubusercontent\.com\/[^\s)"']+|private-user-images\.githubusercontent\.com\/[^\s)"']+)/g;
+const urls = [...new Set(fotoField.match(imgRe) || [])].slice(0, 8);
+for (const [i, url] of urls.entries()) {
+  const res = await fetch(url, { headers: token ? { Authorization: `Bearer ${token}` } : {}, redirect: 'follow' });
+  if (!res.ok) { console.warn(`Foto ${i + 1} konnte nicht geladen werden (${res.status}).`); continue; }
+  const buf = Buffer.from(await res.arrayBuffer());
+  const name = `${String(nr).padStart(3, '0')}-${slug}${i ? '-' + (i + 1) : ''}.jpg`;
+  try {
     await sharp(buf).rotate().resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
       .jpeg({ quality: 82, mozjpeg: true }).toFile(`fotos/${name}`);
-    foto = `fotos/${name}`;
-  } else {
-    console.warn(`Foto konnte nicht geladen werden (${res.status}).`);
-  }
+    fotos.push(`fotos/${name}`);
+  } catch (e) { console.warn(`Foto ${i + 1} ist kein lesbares Bild.`); }
 }
+const foto = fotos[0] || null;
 
 const entry = {
   nr, titel, text, tech,
@@ -68,7 +69,8 @@ const entry = {
   jahr: clip(get('Jahr'), 9),
   material: clip(get('Material'), 120),
   zeit: clip(get('Zeitaufwand'), 60),
-  foto, links, issue,
+  vorgehen: clip(get('Vorgehen'), 5000),
+  foto, fotos, links, issue,
   datum: new Date().toISOString().slice(0, 10),
 };
 projects.push(entry);
