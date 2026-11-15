@@ -3,6 +3,7 @@
 Die Galerie zeigt Produkte aus dem Makerspace des OSC, St.Gallen, mit Beschrieb und Links zu Anleitungen.
 
 **Seite:** https://oscmakeit.github.io
+**Instagram:** https://www.instagram.com/osc_makeit/
 
 ## So kommt ein Projekt auf die Seite
 
