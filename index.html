@@ -272,7 +272,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     head.appendChild(el('span', { class: 'd-nr' }, 'Nr. ' + pad(p.nr)));
     head.appendChild(el('h2', null, str(p.titel, 80)));
     if (p.platzhalter) head.appendChild(el('span', { class: 'badge' }, 'Beispielprojekt mit Platzhalterbildern'));
-    var sub = [techsOf(p).join(', '), str(p.klasse, 30), str(p.jahr, 9)].filter(Boolean).join(' · ');
+    var sub = [techsOf(p).join(', '), str(p.jahr, 9)].filter(Boolean).join(' · ');
     if (sub) head.appendChild(el('span', { class: 'd-sub' }, sub));
     d.appendChild(head);
 
@@ -297,7 +297,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 
     var info = el('div', { class: 'd-info' });
     var dl = el('dl');
-    [['Technik', techsOf(p).join(', ')], ['Material', p.material], ['Zeitaufwand', p.zeit], ['Niveau', p.niveau], ['Klasse', p.klasse], ['Jahr', p.jahr]].forEach(function(r){
+    [['Technik', techsOf(p).join(', ')], ['Material', p.material], ['Zeitaufwand', p.zeit], ['Niveau', p.niveau], ['Jahr', p.jahr]].forEach(function(r){
       var v = str(r[1], 160); if (!v) return;
       dl.appendChild(el('dt', null, r[0])); dl.appendChild(el('dd', null, v));
     });
