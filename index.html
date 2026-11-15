@@ -109,6 +109,19 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .ig h2{margin:0;font-size:clamp(22px,2.6vw,30px);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1;color:#111}
 .ig p{margin:0;font-size:17px;line-height:1.6;color:#333;max-width:520px}
 .ig-btn{gap:10px}
+.foot-link{color:#555;text-decoration:underline;text-underline-offset:4px;min-height:24px}
+.foot-link:hover{color:#ff5f1f}
+.contact{display:flex;flex-direction:column;gap:28px}
+.k-title{margin:0;font-size:clamp(56px,9vw,112px);font-weight:800;line-height:.9;letter-spacing:-.03em;text-transform:uppercase;color:#ff5f1f}
+.k-lead{margin:0;max-width:620px;font-size:19px;line-height:1.6;color:#333}
+.k-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px 40px;border-top:1px solid #111;padding-top:32px;margin-top:12px}
+.k-item h3{margin:0 0 10px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#555}
+.k-item p{margin:0;font-size:18px;line-height:1.6}
+.k-item a{color:#111;text-decoration:underline;text-underline-offset:4px;word-break:break-all}
+.k-item a:hover{color:#ff5f1f}
+.muted{color:#555;font-size:15px}
+.copy{margin-top:10px;min-height:36px;padding:0 12px;border:1px solid #d9d7d2;background:#fff;font:600 14px 'Inter Tight',sans-serif;cursor:pointer}
+.copy:hover{border-color:#111}
 @media (max-width:640px){.sep{display:none}.brand-line{flex-direction:column;align-items:flex-start;gap:2px}.hero-title{flex-wrap:wrap}.wrap{padding:24px 20px 64px}}
 </style>
 </head>
@@ -137,6 +150,29 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     <div class="state" id="state">Projekte werden geladen …</div>
     <section class="grid" id="grid" aria-label="Projekte"></section>
     <article class="detail" id="detail" hidden></article>
+    <section class="contact" id="kontakt-seite" aria-labelledby="kTitle" hidden>
+      <a class="back" href="#">← Alle Projekte</a>
+      <h2 id="kTitle" class="k-title">Kontakt</h2>
+      <p class="k-lead">Fragen zum Makerspace, Interesse an einem Besuch oder einer Zusammenarbeit? Melde dich.</p>
+      <div class="k-grid">
+        <div class="k-item">
+          <h3>Ansprechperson</h3>
+          <p><strong>[Name]</strong><br>Koordination Makerspace</p>
+        </div>
+        <div class="k-item">
+          <h3>E-Mail</h3>
+          <p id="kMail"><span class="muted">Bitte JavaScript aktivieren, um die Adresse zu sehen.</span></p>
+        </div>
+        <div class="k-item">
+          <h3>Adresse</h3>
+          <p>Oberstufe Centrum<br>Notkerstrasse 24<br>9000 St.Gallen</p>
+        </div>
+        <div class="k-item">
+          <h3>Instagram</h3>
+          <p><a href="https://www.instagram.com/osc_makeit/" target="_blank" rel="noopener noreferrer">@osc_makeit</a></p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <section class="ig" id="instagram" aria-labelledby="igTitle">
@@ -148,7 +184,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     <a class="btn ig-btn" href="https://www.instagram.com/osc_makeit/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg><span>@osc_makeit</span></a>
   </section>
 
-  <footer><span>Makerspace OSC, St.Gallen</span><span>Kuratiert vom Team Makerspace</span></footer>
+  <footer><a href="#kontakt" class="foot-link">Kontakt</a><span>Kuratiert vom Team Makerspace</span></footer>
 </div>
 
 <script>
@@ -310,13 +346,33 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     d.appendChild(nav);
   }
 
+  // E-Mail wird erst im Browser zusammengesetzt, damit Spam-Programme sie nicht aus dem Quelltext lesen.
+  function showMail(){
+    var box = $('kMail'); if (box.getAttribute('data-ok')) return;
+    var u = ['daniel', 'fuchs'].join('.'), d = ['edu', 'stadt', 'sg', 'ch'].join('.');
+    var addr = u + String.fromCharCode(64) + d;
+    box.textContent = '';
+    var a = el('a', { href: 'mai' + 'lto:' + addr }, addr);
+    box.appendChild(a);
+    var b = el('button', { type: 'button', class: 'copy' }, 'Adresse kopieren');
+    b.addEventListener('click', function(){
+      try { navigator.clipboard.writeText(addr).then(function(){ b.textContent = 'Kopiert'; }, function(){}); } catch (e) {}
+    });
+    box.appendChild(el('br')); box.appendChild(b);
+    box.setAttribute('data-ok', '1');
+  }
+
   var lastCard = null;
   function route(){
     var m = location.hash.match(/^#projekt-(\d{1,4})$/);
     var p = m ? projects.filter(function(x){ return pad(x.nr) === pad(Number(m[1])); })[0] : null;
-    var inDetail = !!p;
-    $('hero').hidden = inDetail; if ($('instagram')) $('instagram').hidden = inDetail; $('bar').hidden = inDetail; $('grid').hidden = inDetail; $('detail').hidden = !inDetail;
-    if (inDetail){
+    var inDetail = !!p, inKontakt = location.hash === '#kontakt', sub = inDetail || inKontakt;
+    $('hero').hidden = sub; if ($('instagram')) $('instagram').hidden = sub; $('bar').hidden = sub; $('grid').hidden = sub; $('detail').hidden = !inDetail; $('kontakt-seite').hidden = !inKontakt;
+    if (inKontakt){
+      $('state').hidden = true; showMail();
+      document.title = 'Kontakt · Makerspace OSC';
+      window.scrollTo(0, 0);
+    } else if (inDetail){
       $('state').hidden = true;
       renderDetail(p); lastCard = 'karte-' + pad(p.nr);
       document.title = str(p.titel, 80) + ' · Makerspace OSC';
