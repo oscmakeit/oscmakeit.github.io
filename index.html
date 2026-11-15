@@ -21,13 +21,16 @@ a{color:#111}a:hover{color:#b3261e}
 .hero{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between}
 h1{margin:0;font-size:clamp(56px,9vw,112px);font-weight:800;line-height:.9;letter-spacing:-.03em;text-transform:uppercase;color:#ff5f1f;flex:1 1 560px}
 .intro{flex:0 1 340px;display:flex;flex-direction:column;align-items:flex-start;gap:24px}
-.intro p{margin:0;font-size:17px;line-height:1.6;color:#333}
+.intro p{margin:0;font-size:19px;line-height:1.6;color:#333}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;font:600 15px 'Inter Tight',sans-serif;cursor:pointer;text-decoration:none;border:1px solid #111;background:#111;color:#fff}
 .btn:hover{background:#b3261e;border-color:#b3261e;color:#fff}
 .btn.ghost{background:#fff;color:#111}
 .btn.ghost:hover{background:#111;color:#fff;border-color:#111}
 .btn:disabled{opacity:.5;cursor:wait}
-.filters{display:flex;flex-wrap:wrap;gap:8px 28px;border-top:1px solid #111;border-bottom:1px solid #e3e3e3;padding:8px 0}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 28px;border-top:1px solid #111;border-bottom:1px solid #e3e3e3;padding:8px 0}
+.filters{display:flex;flex-wrap:wrap;gap:8px 28px}
+.add{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:15px;color:#ff5f1f;text-decoration:none;white-space:nowrap}
+.add:hover{color:#111}
 .filters button{min-height:44px;padding:0;background:none;border:none;cursor:pointer;font:400 15px 'Inter Tight',sans-serif;color:#555}
 .filters button[aria-pressed="true"]{color:#111;font-weight:600;text-decoration:underline;text-underline-offset:6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:56px 40px;padding:12px 8px}
@@ -104,15 +107,17 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   <div class="top" style="margin-bottom:-16px"><a href="#" class="brand">Makerspace OSC</a><span class="top-right"><span>Oberstufe Centrum St.Gallen</span><a class="ig-icon" href="https://www.instagram.com/osc_makeit/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @osc_makeit"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg></a></span></div>
   <header id="hero" style="display:flex;flex-direction:column;gap:56px">
     <div class="hero">
-      <div class="hero-title"><h1 lang="en">But what<br>if it<br>works</h1><p class="lead">Ein Katalog der Produkte aus unserem Makerspace. Jedes Objekt mit Beschrieb, Entstehung und Links zu Anleitung und Vorlagen.</p></div>
+      <div class="hero-title"><h1 lang="en">But what<br>if it<br>works</h1></div>
       <div class="intro">
-        <img class="logo" src="logo.jpg" alt="Logo Makerspace OSC MAKEIT">
-        <div><a class="btn" id="addBtn" href="#">+ Projekt einreichen</a></div>
+        <p>Ein Katalog der Produkte aus unserem Makerspace. Jedes Objekt mit Beschrieb, Entstehung und Links zu Anleitung und Vorlagen.</p>
       </div>
     </div>
   </header>
 
-  <nav class="filters" id="filters" aria-label="Filter nach Technik"></nav>
+  <div class="bar" id="bar">
+    <nav class="filters" id="filters" aria-label="Filter nach Technik"></nav>
+    <a class="add" id="addBtn" href="#">+ Projekt einreichen</a>
+  </div>
 
   <main>
     <div class="state" id="state">Projekte werden geladen …</div>
@@ -270,7 +275,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     var m = location.hash.match(/^#projekt-(\d{1,4})$/);
     var p = m ? projects.filter(function(x){ return pad(x.nr) === pad(Number(m[1])); })[0] : null;
     var inDetail = !!p;
-    $('hero').hidden = inDetail; if ($('instagram')) $('instagram').hidden = inDetail; $('filters').hidden = inDetail; $('grid').hidden = inDetail; $('detail').hidden = !inDetail;
+    $('hero').hidden = inDetail; if ($('instagram')) $('instagram').hidden = inDetail; $('bar').hidden = inDetail; $('grid').hidden = inDetail; $('detail').hidden = !inDetail;
     if (inDetail){
       $('state').hidden = true;
       renderDetail(p); lastCard = 'karte-' + pad(p.nr);
