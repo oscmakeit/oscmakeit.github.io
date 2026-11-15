@@ -30,9 +30,6 @@ h1{margin:0;font-size:clamp(56px,9vw,112px);font-weight:800;line-height:.9;lette
 .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 28px;border-top:1px solid #111;border-bottom:1px solid #e3e3e3;padding:8px 0}
 .filters{display:flex;flex-wrap:wrap;gap:8px 28px}
 .bar-right{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
-.year{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:#555}
-.year select{font:600 15px 'Inter Tight',sans-serif;color:#111;min-height:40px;padding:0 30px 0 10px;border:1px solid #d9d7d2;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23111'/%3E%3C/svg%3E") no-repeat right 10px center;-webkit-appearance:none;appearance:none;cursor:pointer}
-.year select:hover{border-color:#111}
 .empty{grid-column:1/-1;color:#555;font-size:17px;padding:32px 0}
 .add{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:15px;color:#111;text-decoration:none;white-space:nowrap}
 .add:hover{color:#ff5f1f}
@@ -138,8 +135,6 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   <div class="bar" id="bar">
     <nav class="filters" id="filters" aria-label="Filter nach Technik"></nav>
     <div class="bar-right">
-      <label class="year"><span>Klasse</span><select id="klasseSel"><option value="Alle">Alle</option></select></label>
-      <label class="year"><span>Jahr</span><select id="yearSel"><option value="Alle">Alle</option></select></label>
       <a class="add" id="addBtn" href="#">+ Projekt einreichen</a>
     </div>
   </div>
@@ -192,7 +187,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   var FORM = 'https://github.com/' + REPO + '/issues/new?template=projekt.yml';
 
   var $ = function(id){ return document.getElementById(id); };
-  var projects = [], filter = 'Alle', year = 'Alle', klasse = 'Alle';
+  var projects = [], filter = 'Alle';
   var ROT = ['-1.2deg','0.9deg','-0.6deg','1.2deg','-0.9deg','0.7deg'];
   $('addBtn').href = FORM;
 
@@ -225,18 +220,6 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       b.addEventListener('click', function(){ filter = t; render(); });
       nav.appendChild(b);
     });
-    var years = [];
-    projects.forEach(function(p){ var y = str(p.jahr, 9).trim(); if (y && years.indexOf(y) < 0) years.push(y); });
-    years.sort().reverse();
-    if (year !== 'Alle' && years.indexOf(year) < 0) year = 'Alle';
-    var sel = $('yearSel'); sel.textContent = '';
-    ['Alle'].concat(years).forEach(function(y){ var o = el('option', { value: y }, y === 'Alle' ? 'Alle Jahre' : y); if (y === year) o.selected = true; sel.appendChild(o); });
-    var ORDER = ['1. Oberstufe', '2. Oberstufe', '3. Oberstufe', 'Gemischt'], ks = [];
-    projects.forEach(function(p){ var k = str(p.klasse, 30).trim(); if (k && ks.indexOf(k) < 0) ks.push(k); });
-    ks.sort(function(a, b){ var ia = ORDER.indexOf(a), ib = ORDER.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b); });
-    if (klasse !== 'Alle' && ks.indexOf(klasse) < 0) klasse = 'Alle';
-    var ksel = $('klasseSel'); ksel.textContent = '';
-    ['Alle'].concat(ks).forEach(function(k){ var o = el('option', { value: k }, k === 'Alle' ? 'Alle Klassen' : k); if (k === klasse) o.selected = true; ksel.appendChild(o); });
   }
 
   function fotosOf(p){
@@ -258,8 +241,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     }
     st.hidden = true;
     var list = projects.filter(function(p){
-      return (filter === 'Alle' || techsOf(p).indexOf(filter) >= 0) && (year === 'Alle' || str(p.jahr, 9).trim() === year)
-        && (klasse === 'Alle' || str(p.klasse, 30).trim() === klasse);
+      return filter === 'Alle' || techsOf(p).indexOf(filter) >= 0;
     });
     if (!list.length){ grid.appendChild(el('p', { class: 'empty' }, 'Keine Projekte für diese Auswahl.')); return; }
     list.forEach(function(p, i){
@@ -379,8 +361,6 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   }
   function render(){ route(); }
   window.addEventListener('hashchange', route);
-  $('yearSel').addEventListener('change', function(){ year = this.value; render(); });
-  $('klasseSel').addEventListener('change', function(){ klasse = this.value; render(); });
 
   fetch('projects.json', { cache: 'no-store' })
     .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
