@@ -22,7 +22,9 @@ const clip = (s, n) => s.replace(/\s+\n/g, '\n').slice(0, n).trim();
 
 const titel = clip(get('Titel'), 80);
 const text = clip(get('Kurzer Beschrieb'), 800);
-const tech = clip(get('Technik'), 40);
+const ERLAUBT = ['3D-Druck', 'Laser & Plotter', 'Elektronik', 'Coding & Robotik', 'Holz & Metall', 'Textil', 'Medien & Design'];
+const techs = [...new Set(get('Technik').split(/\s*,\s*|\n/).map((t) => t.trim()).filter((t) => ERLAUBT.includes(t)))];
+const tech = techs[0] || '';
 if (!titel || !text || !tech) {
   console.error('Titel, Beschrieb oder Technik fehlt.');
   process.exit(1);
@@ -63,7 +65,7 @@ for (const [i, url] of urls.entries()) {
 const foto = fotos[0] || null;
 
 const entry = {
-  nr, titel, text, tech,
+  nr, titel, text, tech, techs,
   niveau: clip(get('Niveau'), 30),
   klasse: clip(get('Klasse'), 30),
   jahr: clip(get('Jahr'), 9),

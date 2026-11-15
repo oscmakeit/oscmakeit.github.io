@@ -29,8 +29,8 @@ h1{margin:0;font-size:clamp(56px,9vw,112px);font-weight:800;line-height:.9;lette
 .btn:disabled{opacity:.5;cursor:wait}
 .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 28px;border-top:1px solid #111;border-bottom:1px solid #e3e3e3;padding:8px 0}
 .filters{display:flex;flex-wrap:wrap;gap:8px 28px}
-.add{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:15px;color:#ff5f1f;text-decoration:none;white-space:nowrap}
-.add:hover{color:#111}
+.add{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:15px;color:#111;text-decoration:none;white-space:nowrap}
+.add:hover{color:#ff5f1f}
 .filters button{min-height:44px;padding:0;background:none;border:none;cursor:pointer;font:400 15px 'Inter Tight',sans-serif;color:#555}
 .filters button[aria-pressed="true"]{color:#111;font-weight:600;text-decoration:underline;text-underline-offset:6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:56px 40px;padding:12px 8px}
@@ -61,6 +61,8 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .more{font-size:14px;font-weight:600;margin-top:auto}
 .card:hover .more{color:#b3261e}
 .badge{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid #111;padding:3px 8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;color:#333;background:#f1f0ee;padding:3px 9px;border-radius:999px}
 /* Detailseite */
 .detail{display:flex;flex-direction:column;gap:48px}
 .back{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:600;text-decoration:none}
@@ -158,9 +160,18 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   function str(v, max){ return typeof v === 'string' ? v.slice(0, max || 600) : (typeof v === 'number' ? String(v) : ''); }
   function pad(n){ n = Number(n) || 0; return ('00' + n).slice(-3); }
 
+  var CATS = ['3D-Druck','Laser & Plotter','Elektronik','Coding & Robotik','Holz & Metall','Textil','Medien & Design'];
+  var LEGACY = { 'Lasercutter': 'Laser & Plotter', 'Vinylplotter': 'Laser & Plotter', 'Programmierung': 'Coding & Robotik', 'Holz': 'Holz & Metall' };
+  function techsOf(p){
+    var arr = Array.isArray(p.techs) && p.techs.length ? p.techs : (p.tech ? [p.tech] : []);
+    var out = [];
+    arr.forEach(function(t){ t = str(t, 40); t = LEGACY[t] || t; if (t && out.indexOf(t) < 0) out.push(t); });
+    return out.slice(0, 7);
+  }
   function renderFilters(){
-    var techs = ['Alle'];
-    projects.forEach(function(p){ var t = str(p.tech, 40); if (t && techs.indexOf(t) < 0) techs.push(t); });
+    var used = [];
+    projects.forEach(function(p){ techsOf(p).forEach(function(t){ if (used.indexOf(t) < 0) used.push(t); }); });
+    var techs = ['Alle'].concat(CATS.filter(function(c){ return used.indexOf(c) >= 0; }), used.filter(function(t){ return CATS.indexOf(t) < 0; }));
     if (techs.indexOf(filter) < 0) filter = 'Alle';
     var nav = $('filters'); nav.textContent = '';
     techs.forEach(function(t){
@@ -188,7 +199,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       return;
     }
     st.hidden = true;
-    var list = filter === 'Alle' ? projects : projects.filter(function(p){ return p.tech === filter; });
+    var list = filter === 'Alle' ? projects : projects.filter(function(p){ return techsOf(p).indexOf(filter) >= 0; });
     list.forEach(function(p, i){
       var c = el('article', { class: 'card', id: 'karte-' + pad(p.nr) });
       c.style.transform = 'rotate(' + ROT[i % ROT.length] + ')';
@@ -199,7 +210,8 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       c.appendChild(ph);
       var meta = el('div', { class: 'meta' });
       meta.appendChild(el('span', { class: 'nr' }, 'Nr. ' + pad(p.nr)));
-      meta.appendChild(el('span', { class: 'sub' }, [str(p.tech, 40), str(p.klasse, 30)].filter(Boolean).join(' · ')));
+      meta.appendChild(el('span', { class: 'sub' }, str(p.klasse, 30)));
+      var tg = el('div', { class: 'tags' }); techsOf(p).forEach(function(t){ tg.appendChild(el('span', { class: 'tag' }, t)); }); if (tg.children.length) c.appendChild(tg);
       c.appendChild(meta);
       if (p.platzhalter) c.appendChild(el('span', { class: 'badge' }, 'Beispiel'));
       var h = el('h2'); h.appendChild(el('a', { href: '#' + hashOf(p) }, str(p.titel, 80))); c.appendChild(h);
@@ -216,7 +228,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     head.appendChild(el('span', { class: 'd-nr' }, 'Nr. ' + pad(p.nr)));
     head.appendChild(el('h2', null, str(p.titel, 80)));
     if (p.platzhalter) head.appendChild(el('span', { class: 'badge' }, 'Beispielprojekt mit Platzhalterbildern'));
-    var sub = [str(p.tech, 40), str(p.klasse, 30), str(p.jahr, 9)].filter(Boolean).join(' · ');
+    var sub = [techsOf(p).join(', '), str(p.klasse, 30), str(p.jahr, 9)].filter(Boolean).join(' · ');
     if (sub) head.appendChild(el('span', { class: 'd-sub' }, sub));
     d.appendChild(head);
 
@@ -241,7 +253,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 
     var info = el('div', { class: 'd-info' });
     var dl = el('dl');
-    [['Technik', p.tech], ['Material', p.material], ['Zeitaufwand', p.zeit], ['Niveau', p.niveau], ['Klasse', p.klasse], ['Jahr', p.jahr]].forEach(function(r){
+    [['Technik', techsOf(p).join(', ')], ['Material', p.material], ['Zeitaufwand', p.zeit], ['Niveau', p.niveau], ['Klasse', p.klasse], ['Jahr', p.jahr]].forEach(function(r){
       var v = str(r[1], 160); if (!v) return;
       dl.appendChild(el('dt', null, r[0])); dl.appendChild(el('dd', null, v));
     });

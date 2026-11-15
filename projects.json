@@ -28,12 +28,15 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "3D-Druck"
+    ]
   },
   {
     "nr": 2,
     "titel": "Schlüsselanhänger",
-    "tech": "Lasercutter",
+    "tech": "Laser & Plotter",
     "niveau": "Einsteiger",
     "klasse": "1. Oberstufe",
     "jahr": "2026",
@@ -54,7 +57,10 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "Laser & Plotter"
+    ]
   },
   {
     "nr": 3,
@@ -85,7 +91,12 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "Elektronik",
+      "Coding & Robotik",
+      "Laser & Plotter"
+    ]
   },
   {
     "nr": 4,
@@ -111,12 +122,16 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "Textil",
+      "Laser & Plotter"
+    ]
   },
   {
     "nr": 5,
     "titel": "Insektenhotel",
-    "tech": "Holz",
+    "tech": "Holz & Metall",
     "niveau": "Mittel",
     "klasse": "1. Oberstufe",
     "jahr": "2026",
@@ -137,12 +152,15 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "Holz & Metall"
+    ]
   },
   {
     "nr": 6,
     "titel": "Wetterstation",
-    "tech": "Programmierung",
+    "tech": "Coding & Robotik",
     "niveau": "Fortgeschritten",
     "klasse": "3. Oberstufe",
     "jahr": "2026",
@@ -168,6 +186,11 @@
     ],
     "issue": null,
     "datum": "2026-11-14",
-    "platzhalter": true
+    "platzhalter": true,
+    "techs": [
+      "Coding & Robotik",
+      "Elektronik",
+      "3D-Druck"
+    ]
   }
 ]

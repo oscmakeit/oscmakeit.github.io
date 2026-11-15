@@ -30,15 +30,16 @@ body:
     id: tech
     attributes:
       label: Technik
+      description: Mehrfachauswahl möglich. Die zuerst gewählte gilt als Haupttechnik.
+      multiple: true
       options:
         - 3D-Druck
-        - Lasercutter
+        - "Laser & Plotter"
         - Elektronik
-        - Programmierung
-        - Vinylplotter
+        - "Coding & Robotik"
+        - "Holz & Metall"
         - Textil
-        - Holz
-        - Anderes
+        - "Medien & Design"
     validations:
       required: true
   - type: dropdown
