@@ -232,7 +232,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     if (techs.indexOf(filter) < 0) filter = 'Alle';
     var nav = $('filters'); nav.textContent = '';
     techs.forEach(function(t){
-      var b = el('button', { type: 'button', 'aria-pressed': String(t === filter) }, t === 'Alle' ? 'Alle Objekte' : t);
+      var b = el('button', { type: 'button', 'aria-pressed': String(t === filter) }, t === 'Alle' ? 'Alle Projekte' : t);
       b.addEventListener('click', function(){ filter = t; render(); });
       nav.appendChild(b);
     });
