@@ -120,8 +120,6 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .k-item a{color:#111;text-decoration:underline;text-underline-offset:4px;word-break:break-all}
 .k-item a:hover{color:#ff5f1f}
 .muted{color:#555;font-size:15px}
-.copy{margin-top:10px;min-height:36px;padding:0 12px;border:1px solid #d9d7d2;background:#fff;font:600 14px 'Inter Tight',sans-serif;cursor:pointer}
-.copy:hover{border-color:#111}
 @media (max-width:640px){.sep{display:none}.brand-line{flex-direction:column;align-items:flex-start;gap:2px}.hero-title{flex-wrap:wrap}.wrap{padding:24px 20px 64px}}
 </style>
 </head>
@@ -354,11 +352,6 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     box.textContent = '';
     var a = el('a', { href: 'mai' + 'lto:' + addr }, addr);
     box.appendChild(a);
-    var b = el('button', { type: 'button', class: 'copy' }, 'Adresse kopieren');
-    b.addEventListener('click', function(){
-      try { navigator.clipboard.writeText(addr).then(function(){ b.textContent = 'Kopiert'; }, function(){}); } catch (e) {}
-    });
-    box.appendChild(el('br')); box.appendChild(b);
     box.setAttribute('data-ok', '1');
   }
 
