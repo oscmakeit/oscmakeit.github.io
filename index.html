@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Makerspace OSC · Projektgalerie</title>
+<meta name="robots" content="noai, noimageai">
 <meta name="description" content="Produkte aus dem Makerspace des OSC, St.Gallen, mit Beschrieb und Anleitungen zum Nachbauen.">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -161,7 +162,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       <div class="k-grid">
         <div class="k-item">
           <h3>Ansprechperson</h3>
-          <p><strong>[Name]</strong><br>Koordination Makerspace</p>
+          <p><strong id="kName">…</strong><br>Koordination Makerspace</p>
         </div>
         <div class="k-item">
           <h3>E-Mail</h3>
@@ -178,15 +179,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       </div>
       <div class="team">
         <h3 class="team-title">MakerSpace Team</h3>
-        <ul class="team-grid">
-          <li class="person"><span class="p-name">[Name]</span><span class="p-role">Koordination</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-          <li class="person"><span class="p-name">[Name]</span></li>
-        </ul>
+        <ul class="team-grid" id="teamList"><li class="muted">Bitte JavaScript aktivieren, um das Team zu sehen.</li></ul>
       </div>
     </section>
   </main>
@@ -360,6 +353,22 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     box.setAttribute('data-ok', '1');
   }
 
+  // Namen werden erst im Browser entschlüsselt, damit einfache Spam- und KI-Crawler sie nicht aus dem Quelltext lesen.
+  var TEAM = [['c2hjdUYgbGVpbmFE','Koordination'],['ZGltaGNTIGxlYWhjaU0=',''],['c2hjdUYgYWtrZWJlUg==',''],['cmVsaGFHIGFuaXR0ZUI=',''],['cmVncmVibmVoY2lFIG9jaU4=',''],['aWxsw7ZSIG5haXJkQQ==',''],['bGViaWVXIHNuZW1lbEM=','']];
+  function dec(x){ try { return decodeURIComponent(escape(atob(x))).split('').reverse().join(''); } catch (e) { return ''; } }
+  function showTeam(){
+    var ul = $('teamList'); if (ul.getAttribute('data-ok')) return;
+    ul.textContent = '';
+    TEAM.forEach(function(t){
+      var li = el('li', { class: 'person' });
+      li.appendChild(el('span', { class: 'p-name' }, dec(t[0])));
+      if (t[1]) li.appendChild(el('span', { class: 'p-role' }, t[1]));
+      ul.appendChild(li);
+    });
+    $('kName').textContent = dec(TEAM[0][0]);
+    ul.setAttribute('data-ok', '1');
+  }
+
   var lastCard = null;
   function route(){
     var m = location.hash.match(/^#projekt-(\d{1,4})$/);
@@ -367,7 +376,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
     var inDetail = !!p, inKontakt = location.hash === '#kontakt', sub = inDetail || inKontakt;
     $('hero').hidden = sub; if ($('instagram')) $('instagram').hidden = sub; $('bar').hidden = sub; $('grid').hidden = sub; $('detail').hidden = !inDetail; $('kontakt-seite').hidden = !inKontakt; $('footKontakt').style.visibility = inKontakt ? 'hidden' : '';
     if (inKontakt){
-      $('state').hidden = true; showMail();
+      $('state').hidden = true; showMail(); showTeam();
       document.title = 'Kontakt · Makerspace OSC';
       window.scrollTo(0, 0);
     } else if (inDetail){
