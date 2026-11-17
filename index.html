@@ -128,7 +128,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
 .person::before{content:"";position:absolute;top:-10px;left:50%;width:72px;height:20px;margin-left:-36px;background:rgba(255,95,31,.82);transform:rotate(-3deg)}
 .person:nth-child(2n){transform:rotate(1deg)}.person:nth-child(2n+1){transform:rotate(-1deg)}
 .p-name{font-size:20px;font-weight:600}
-.p-role{font-size:14px;color:#555}
+.p-role{font-size:14px;color:#555;white-space:pre-line}
 @media (max-width:640px){.sep{display:none}.brand-line{flex-direction:column;align-items:flex-start;gap:2px}.hero-title{flex-wrap:wrap}.wrap{padding:24px 20px 64px}}
 </style>
 </head>
@@ -162,7 +162,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
       <div class="k-grid">
         <div class="k-item">
           <h3>Ansprechperson</h3>
-          <p><strong id="kName">…</strong><br>Verantwortlicher MakerSpace Bürgli</p>
+          <p><strong id="kName">…</strong><br>Koordination Makerspace<br>Verantwortlicher MakerSpace Bürgli</p>
         </div>
         <div class="k-item">
           <h3>E-Mail</h3>
@@ -358,7 +358,7 @@ footer{border-top:1px solid #111;padding-top:20px;display:flex;flex-wrap:wrap;ju
   }
 
   // Namen werden erst im Browser entschlüsselt, damit einfache Spam- und KI-Crawler sie nicht aus dem Quelltext lesen.
-  var TEAM = [['c2hjdUYgbGVpbmFE','Verantwortlicher MakerSpace Bürgli'],['ZGltaGNTIGxlYWhjaU0=','Verantwortlicher MakerSpace Blumenau'],['c2hjdUYgYWtrZWJlUg==',''],['cmVsaGFHIGFuaXR0ZUI=',''],['cmVncmVibmVoY2lFIG9jaU4=',''],['aWxsw7ZSIG5haXJkQQ==',''],['bGViaWVXIHNuZW1lbEM=','']];
+  var TEAM = [['c2hjdUYgbGVpbmFE','Koordination\nVerantwortlicher MakerSpace Bürgli'],['ZGltaGNTIGxlYWhjaU0=','Verantwortlicher MakerSpace Blumenau'],['c2hjdUYgYWtrZWJlUg==',''],['cmVsaGFHIGFuaXR0ZUI=',''],['cmVncmVibmVoY2lFIG9jaU4=',''],['aWxsw7ZSIG5haXJkQQ==',''],['bGViaWVXIHNuZW1lbEM=','']];
   function dec(x){ try { return decodeURIComponent(escape(atob(x))).split('').reverse().join(''); } catch (e) { return ''; } }
   function showTeam(){
     var ul = $('teamList'); if (ul.getAttribute('data-ok')) return;
